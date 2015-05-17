@@ -30,9 +30,10 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
                 //ADD TO FIREBASE
                 chat.push({
                     from: name,
-                    body: $scope.msg
+                    message: $scope.msg
 
                 });
+
                 if (msg == answer1) {
                     alert(name + ' Win the game!!!!');
                     game.remove();
@@ -40,6 +41,9 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
 
                 //RESET MESSAGE
                 $scope.msg = "";
+
+                //Scroll down to bottom
+
             }
 
 
