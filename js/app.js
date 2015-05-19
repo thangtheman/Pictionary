@@ -34,10 +34,11 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
 
                 });
 
-                if (msg == answer1) {
-                    alert(name + ' Win the game!!!!');
-                    game.remove();
-                }
+                //
+                //if (msg == answer1) {
+                //    alert(name + ' Win the game!!!!');
+                //    game.remove();
+                //}
 
                 //RESET MESSAGE
                 $scope.msg = "";
