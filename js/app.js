@@ -7,95 +7,68 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
     function($scope, $firebaseArray) {
         // CREATE A REFERENCE TO FIREBASE
 
+        // CREATE A REFERENCE TO FIREBASE
+        var messagesRef = new Firebase('https://task4thang.firebaseio.com/Chat');
 
-//CREATE A FIREBASE REFERENCE
-        var chat = new Firebase("https://task4thang.firebaseio.com/Chat");
+        // REGISTER DOM ELEMENTS
+        var messageField = $('#messageInput');
+        var nameField = $('#nameInput');
+        var messageList = $('#example-messages');
 
-        var answer1, msg;
+        // LISTEN FOR KEYPRESS EVENT
+        messageField.keypress(function (e) {
+            if (e.keyCode == 13) {
+                //FIELD VALUES
+                var username = nameField.val();
+                var message = messageField.val();
 
-// GET MESSAGES AS AN ARRAY
-        $scope.messages = $firebaseArray(chat);
-
-
-//ADD MESSAGE METHOD
-        $scope.addMessage = function(e) {
-
-            //LISTEN FOR RETURN KEY
-            if (e.keyCode === 13 && $scope.msg) {
-                //ALLOW CUSTOM OR ANONYMOUS USER NAMES
-                var name = $scope.name || "anonymous";
-                msg=$scope.msg;
-
-
-                //ADD TO FIREBASE
-                chat.push({
-                    from: name,
-                    message: $scope.msg
-
-                });
-
-                //
-                //if (msg == answer1) {
-                //    alert(name + ' Win the game!!!!');
-                //    game.remove();
-                //}
-
-                //RESET MESSAGE
-                $scope.msg = "";
-
-                //Scroll down to bottom
-
+                //SAVE DATA TO FIREBASE AND EMPTY FIELD
+                messagesRef.push({name:username, text:message});
+                messageField.val('');
             }
+        });
 
+        // Add a callback that is triggered for each chat message.
+        messagesRef.limitToLast(10).on('child_added', function (snapshot) {
+            //GET DATA
+            var data = snapshot.val();
+            var username = data.name || "anonymous";
+            var message = data.text;
 
-        };
+            //CREATE ELEMENTS MESSAGE & SANITIZE TEXT
+            var messageElement = $("<li>");
+            var nameElement = $("<strong class='example-chat-username'></strong>")
+            nameElement.text(username);
+            messageElement.text(message).prepend(nameElement);
 
+            //ADD MESSAGE
+            messageList.append(messageElement)
 
-
-
-//Event emititng  ---- currently working
-//        var events = require('events');
-//        var EventEmitter = events.EventEmitter;
-//
-//        var chat = new EventEmitter();
-//        var users = [], chatlog = [];
-//
-//        chat.on('message', function(message) {
-//            chatlog.push(message);
-//        });
-//
-//        chat.on('join', function(nickname) {
-//            users.push(nickname);
-//        });
-//
-//// Emit events here
-//        chat.emit('join','Cool');
-//        chat.emit('message','Hot');
-
-        // Game Answer input
-
+            //SCROLL TO BOTTOM OF MESSAGE LIST
+            messageList[0].scrollTop = messageList[0].scrollHeight;
+        });
             var game = new Firebase("https://task4thang.firebaseio.com/Game");
 
-          //ADD MESSAGE METHOD
-            $scope.addAnswer = function (a) {
-                //LISTEN FOR RETURN KEY
-                if (a.keyCode === 13 && $scope.ans) {
-                    //ALLOW CUSTOM OR ANONYMOUS USER NAMES
-                     var answer = $scope.ans;
-
-                    //ADD TO FIREBASE
-
-                    game.child('Answer').push({value: answer});
-
-                    answer1= answer;
-
-                    //RESET MESSAGE
-                    $scope.ans = "";
-
-
-
-                }
-            };
+          ////ADD MESSAGE METHOD
+          //  $scope.addAnswer = function (a) {
+          //      //LISTEN FOR RETURN KEY
+          //      if (a.keyCode === 13 && $scope.ans) {
+          //          //ALLOW CUSTOM OR ANONYMOUS USER NAMES
+          //           var answer = $scope.ans;
+          //
+          //          //ADD TO FIREBASE
+          //
+          //          game.child('Answer').push({value: answer});
+          //
+          //          answer1= answer;
+          //
+          //          //RESET MESSAGE
+          //          $scope.ans = "";
+          //
+          //
+          //
+          //      }
+          //  };
 
 
     }

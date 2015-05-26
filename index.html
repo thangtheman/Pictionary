@@ -37,8 +37,8 @@
 
 
 <!--Drawing board-->
-<div  class=" col-md-6" style="padding:50px">
-    <p style="text-align: center">Click and Drag to Draw</p>
+<div  class=" col-md-6" style="padding-left: 50px">
+    <p style="text-align: left"><strong>Click and Drag to Draw</strong></p>
     <canvas  width="400" height="300" id="drawing-canvas" drawing></canvas>
 <br>
 
@@ -52,28 +52,21 @@
 
 
 
+    <!-- CHAT MARKUP -->
+    <div class="example-chat l-demo-container col-md-4">
+        <header><strong>Chat & Answer</strong></header>
 
-<!-- CHAT MARKUP -->
-<div class="example-chat col-md-4" >
-    <header><h4><strong>One Line Chat / person</strong></h4></header>
+        <div class='example-chat-toolbar'>
+            <label for="nameInput">Username:</label>
+            <input type='text' id='nameInput' placeholder='enter a username...'>
+        </div>
 
-    <div class="example-chat-toolbar">
-        <label for="nameInput">Username:</label>
-        <input ng-model="name" type="text" id="nameInput" placeholder="enter a username...">
+        <ul id='example-messages' class="example-chat-messages"></ul>
+
+        <footer>
+            <input type='text' id='messageInput'  placeholder='Type a message...'>
+        </footer>
     </div>
-
-    <ul id="example-messages" class="example-chat-messages">
-        <li ng-repeat="msg in messages">
-            <strong class="example-chat-username">{{ msg.from }}</strong>
-            {{ msg.message }}
-        </li>
-    </ul>
-
-    <footer>
-        <input ng-model="msg" ng-keydown="addMessage($event)" type="text" id="messageInput"  placeholder="Type a message...">
-    </footer>
-</div>
-
 
 
 <!--This 2 div end = for the container and row-->
@@ -83,7 +76,7 @@
 <!--// Rules and Text Center-->
 <div style="text-align: center">
     <h1>Rules</h1>
-    <p><h2> The game logic is currently broken...you can use this to draw and chat with random people</h2></p>
+    <p><h2>Guess what other people are drawing</h2></p>
 
 
 </div>
