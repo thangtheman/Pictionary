@@ -31,9 +31,7 @@
 
 
 <!-- Div to devide the screen to two and make it more responsive toward small or larger device.-->
-<div class="container-fluid">
-<div class="row">
-
+<div class="container-fluid row">
 
 
 <!--Drawing board-->
@@ -42,9 +40,16 @@
     <canvas  width="400" height="300" id="drawing-canvas" drawing></canvas>
 <br>
 
+
+
+
+
      <!--  Answer Input -->
 
-     <input type="text" id="answerInput" ng-model="ans" placeholder="Your Answer" ng-keydown="addAnswer($event)">
+     <input type="text" id="answerInput" ng-hide="newPost.value != null" ng-model="ans" placeholder="Your Answer" ng-keydown="addAnswer($event)">
+
+
+
     <button class="btn-md btn-danger" id="resetDrawing"> Reset Drawing</button>
 
 </div>
@@ -52,8 +57,12 @@
 
 
 
+
+
+
     <!-- CHAT MARKUP -->
-    <div class="example-chat l-demo-container col-md-4">
+    <div class="col-md-6">
+    <div class="example-chat l-demo-container">
         <header><strong>Chat & Answer</strong></header>
 
         <div class='example-chat-toolbar'>
@@ -67,16 +76,21 @@
             <input type='text' id='messageInput'  placeholder='Type a message...'>
         </footer>
     </div>
-
+    </div>
 
 <!--This 2 div end = for the container and row-->
-</div>
 </div>
 
 <!--// Rules and Text Center-->
 <div style="text-align: center">
+    <br/>
+    <h1>{{messageResult}}</h1>
+
+    <br/>
+    <br/>
     <h1>Rules</h1>
     <p><h2>Guess what other people are drawing</h2></p>
+    <p><h2>Refresh the page after someone has won the game</h2></p>
 
 
 </div>
