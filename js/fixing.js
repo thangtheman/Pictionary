@@ -1,21 +1,27 @@
-/**
- * Created by ThangTheMan on 5/12/15.
- */
+var game = new Firebase("https://task4thang.firebaseio.com/Game");
+game.once("child_added", function(snapshot) {
+    newPost = snapshot.val();
+    console.log("Answer: " + newPost.value);
+});
 
-var myDataRef = new Firebase('https://oldo00oeaat.firebaseio-demo.com/');
-$('#messageInput').keypress(function (e) {
-    if (e.keyCode == 13) {
-        var name = $('#nameInput').val();
-        var text = $('#messageInput').val();
-        myDataRef.push({name: name, text: text});
-        $('#messageInput').val('');
+//ADD MESSAGE METHOD
+$scope.addAnswer = function (a) {
+    //LISTEN FOR RETURN KEY
+    if (a.keyCode === 13 && $scope.ans) {
+        //ALLOW CUSTOM OR ANONYMOUS USER NAMES
+        var answer = $scope.ans;
+
+        //ADD TO FIREBASE
+
+        game.push({value: answer});
+
+
+
+
+        //RESET MESSAGE
+        $scope.ans = "";
+
+
+
     }
-});
-myDataRef.on('child_added', function(snapshot) {
-    var message = snapshot.val();
-    displayChatMessage(message.name, message.text);
-});
-function displayChatMessage(name, text) {
-    $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-    $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
 };

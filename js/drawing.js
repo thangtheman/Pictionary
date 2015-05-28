@@ -9,7 +9,7 @@ $(document).ready(function () {
     var name = $("#nameInput").val() ;
     $( "#resetDrawing" ).click(function() {
         pixelDataRef.remove();
-        alert(name + "someone just click reset!");
+        alert(name + " just click reset!");
     });
 
 

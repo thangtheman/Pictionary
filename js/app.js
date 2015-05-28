@@ -6,12 +6,12 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
     //Chat box
     function($scope, $firebaseArray) {
         // CREATE A REFERENCE TO FIREBASE
-        var message1, newPost ;
-        $scope.messageResult = "test";
+        var message1, newPost, resultText ;
+
         // CREATE A REFERENCE TO FIREBASE
         var messagesRef = new Firebase('https://task4thang.firebaseio.com/Chat');
-        var username, textResult;
-        $scope.messageResult = textResult;
+        var username;
+
         var pixelDataRef = new Firebase('https://task4thang.firebaseio.com/Drawing');
         // REGISTER DOM ELEMENTS
         var messageField = $('#messageInput');
@@ -28,19 +28,27 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
                 //SAVE DATA TO FIREBASE AND EMPTY FIELD
                 messagesRef.push({name:username, text:message});
                 messageField.val('');
+
             }
 
-            if (message1 == newPost.value ) {
+            if (message1 === newPost.value ) {
                 var result = new Firebase("https://task4thang.firebaseio.com/Result");
+                result.push({value: username + " has won the game"});
+             result.once("child_added", function(snapshot){
+                resultText = snapshot.val();
+                 console.log( resultText.value);
+             });
 
 
-                    result.push({value: username + " won the game"});
+                //    var textResult = $('#example-result');
+                //    textResult
+                //    result.push({value: username + " won the game"});
+                //
+                //$scope.messageResult = username + " won the game";
+                //
+                //   console.log($scope.messageResult);
 
-
-
-                   console.log($scope.messageResult);
-
-                    console.log("Testing: " + result.value);
+                    //console.log("Testing: " + result.value);
 
 
 
@@ -48,7 +56,7 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
 
                 game.remove();
                 pixelDataRef.remove();
-                result.remove();
+
             };
         });
 
