@@ -1,8 +1,8 @@
-"use strict";
-var myApp = angular.module("myApp", ["firebase"]);
+(function() {
 
-myApp.controller("MyController", ["$scope", "$firebaseArray",
+    'use strict';
 
+<<<<<<< HEAD
     //Chat box
     function($scope, $firebaseArray) {
         // CREATE A REFERENCE TO FIREBASE
@@ -107,4 +107,8 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
 
 
 ]);
+=======
+    angular.module('myApp', ['formly', 'formlyBootstrap','firebase']);
+>>>>>>> origin/master
 
+})();
