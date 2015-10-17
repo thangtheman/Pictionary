@@ -40,20 +40,11 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
              });
 
 
-                //    var textResult = $('#example-result');
-                //    textResult
-                //    result.push({value: username + " won the game"});
-                //
-                //$scope.messageResult = username + " won the game";
-                //
-                //   console.log($scope.messageResult);
-
-                    //console.log("Testing: " + result.value);
 
 
 
 
-
+                result.remove();
                 game.remove();
                 pixelDataRef.remove();
 
@@ -84,8 +75,8 @@ myApp.controller("MyController", ["$scope", "$firebaseArray",
 
 
         var game = new Firebase("https://task4thang.firebaseio.com/Game");
-            game.once("child_added", function(snapshot) {
-                newPost = snapshot.val();
+        game.once("child_added", function(snapshot) {
+            newPost = snapshot.val();
             console.log("Answer: " + newPost.value);
         });
 

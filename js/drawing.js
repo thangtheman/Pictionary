@@ -63,7 +63,7 @@ $(document).ready(function () {
             if (e2 > -dy) {
                 err = err - dy;
                 x0 = x0 + sx;
-            }
+
             if (e2 < dx) {
                 err = err + dx;
                 y0 = y0 + sy;
